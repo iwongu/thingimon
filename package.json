@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/iwongu/thingimon",
   "dependencies": {
+    "minimist": "^1.1.1",
+    "parse": "^1.3.5",
     "serialport": "^1.6.3"
   }
 }
