@@ -1,6 +1,7 @@
 var SerialPort = require("serialport").SerialPort;
 var RoomStatus = require('./store').RoomStatus;
 
+var dataRequest = [0xDE];
 var body = [0xDE, 0xAD, 0xBE, 0xAF, 0x00, 0x00, 0x00, 0x00];
 var n = 0;
 var sp = new SerialPort('/dev/ttyUSB0');
@@ -19,6 +20,7 @@ sp.on('data', function(data) {
     if (n == 8) {
       var temp = (body[4] * 0xFF + body[5]) / 100;
       var humi = (body[6] * 0xFF + body[7]) / 100;
+      console.log(new Date().toISOString());
       console.log('temp: ' + temp);
       console.log('humi: ' + humi);
       RoomStatus.store(temp, humi);
@@ -28,5 +30,5 @@ sp.on('data', function(data) {
 });
 
 setInterval(function() {
-  sp.write(new Buffer([0xDE]));
-}, 5000);
+  sp.write(dataRequest);
+}, 10000);
