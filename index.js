@@ -27,3 +27,6 @@ sp.on('data', function(data) {
   }
 });
 
+setInterval(function() {
+  sp.write(new Buffer([0xDE]));
+}, 5000);
