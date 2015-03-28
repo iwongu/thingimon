@@ -55,7 +55,9 @@ void setup()
 void loop()
 {
     if (XBee.available()) {
-      if (0xDE != XBee.read()) {
+      int c = XBee.read();
+      if (0xDE != c) {
+        Serial.print("received: "); Serial.println(c, HEX);
         return;
       }
     } else {
