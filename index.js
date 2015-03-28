@@ -20,7 +20,6 @@ sp.on('data', function(data) {
     if (n == 8) {
       var temp = (body[4] * 0xFF + body[5]) / 100;
       var humi = (body[6] * 0xFF + body[7]) / 100;
-      console.log(new Date().toISOString());
       console.log('temp: ' + temp);
       console.log('humi: ' + humi);
       RoomStatus.store(temp, humi);
@@ -30,5 +29,6 @@ sp.on('data', function(data) {
 });
 
 setInterval(function() {
+  console.log(new Date().toISOString());
   sp.write(dataRequest);
 }, 10000);
